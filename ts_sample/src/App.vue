@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-	<p>{{ name }} - {{ age }}</p>
-	<button @click="changeName('Bob')">change name</button>
-	<button @click="changeAge(90)">change age</button>
+    <p>{{ message }}</p>
   </div>
 </template>
 
@@ -10,22 +8,23 @@
 
 import { defineComponent } from 'vue'
 
+interface Book {
+  title: string
+  author: string
+  year: number
+}
+
 export default defineComponent({
   name: 'App',
-  components: {},
   data() {
-	return {
-    name: 'Link',
-    age: 40
-	}
-  },
-  methods: {
-	changeName(name: string) {
-    this.name = name
-	},
-	changeAge(age: number) {
-    this.age = age
-	}
+    return {
+      message: 'Hello World!',
+      book: {
+        title: 'Test',
+        author: 'Mayo',
+        year: 2021
+      } as Book
+    }
   }
 });
 </script>
