@@ -1,19 +1,13 @@
 <template>
   <div id="app">
     <p>{{ message }}</p>
+    <input type="text" @change="handleChange" />
   </div>
 </template>
 
 <script lang="ts">
 
-import { defineComponent, PropType } from 'vue'
-
-interface Book {
-  title: string
-  author: string
-  price: number
-  onsale?: boolean
-}
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'App',
@@ -22,25 +16,12 @@ export default defineComponent({
       message: 'Hello World!',
     }
   },
-  props: {
-    bookA: {
-      type: Object as PropType<Book>,
-      default: () => ({
-        title: 'Sushi'
-      }),
-      validator: (book: book) => !!book.title
-    },
-    bookB: {
-      type: Object as PropType<Book>,
-      default(this: void) {
-        return {
-          title: 'Kaisendon'
-        }
-      },
-      validator(this: void, book: book) {
-        return !! book.title
-      }
+  setup() {
+    const handleChange = (evt: Event) => {
+      console.log((evt.target as HTMLInputElement).value);
     }
+
+    return { handleChange }
   }
 });
 </script>
