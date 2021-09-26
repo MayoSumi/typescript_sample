@@ -6,12 +6,13 @@
 
 <script lang="ts">
 
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 interface Book {
   title: string
   author: string
-  year: number
+  price: number
+  onsale?: boolean
 }
 
 export default defineComponent({
@@ -19,11 +20,26 @@ export default defineComponent({
   data() {
     return {
       message: 'Hello World!',
-      book: {
-        title: 'Test',
-        author: 'Mayo',
-        year: 2021
-      } as Book
+    }
+  },
+  props: {
+    bookA: {
+      type: Object as PropType<Book>,
+      default: () => ({
+        title: 'Sushi'
+      }),
+      validator: (book: book) => !!book.title
+    },
+    bookB: {
+      type: Object as PropType<Book>,
+      default(this: void) {
+        return {
+          title: 'Kaisendon'
+        }
+      },
+      validator(this: void, book: book) {
+        return !! book.title
+      }
     }
   }
 });
